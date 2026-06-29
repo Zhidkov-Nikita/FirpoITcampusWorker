@@ -1,0 +1,45 @@
+# ============================================================
+# Конфигурация скрапера платформы IT campus (https://firpo.ru/campus)
+# ============================================================
+# Скопируйте этот файл в scraper_config.yaml и заполните
+# реальные учетные данные.
+#
+# cp scraper_config.example.yaml scraper_config.yaml
+# ============================================================
+
+auth:
+  # URL страницы входа в админ-панель
+  login_url: "https://edu.firpo.ru/campus"
+
+  email: !env FIRPO_LOGIN
+  password: !env FIRPO_PASSWORD
+
+  # Селекторы полей формы (Quasar q-input с aria-label)
+  email_selector: "input[aria-label='Электронная почта']"
+  password_selector: "input[aria-label='Пароль']"
+
+  # Кнопка входа (type="button", НЕ submit)
+  submit_selector: "button.login-button"
+
+  # Маркер успешной авторизации:
+  # URL, на который должен перейти браузер после входа.
+  # Если указан — парсер ждёт перехода на этот URL (или его подстроку).
+  # Если пустой — используется success_selector.
+  success_url: "/campus/operator/courses"
+
+  # CSS-селектор элемента, подтверждающего вход (fallback, если success_url не задан)
+  success_selector: ".q-page"
+
+  # Таймаут ожидания авторизации (миллисекунды)
+  login_timeout: 30000
+
+browser:
+  # Путь до системного Chromium (обязательно для Ubuntu)
+  binary_path: "/usr/bin/chromium-browser"
+
+  # Запуск в headless-режиме (true для сервера, false для отладки)
+  headless: true
+
+  # Разрешение окна браузера
+  viewport_width: 1920
+  viewport_height: 1080
